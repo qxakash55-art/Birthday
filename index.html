@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday SOJIB 🎂✨</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&family=Poppins:wght@600;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --primary: #ff477e;
+  --secondary: #ff70a6;
+  --accent: #ffd166;
+  --card-bg: rgba(255, 255, 255, 0.14);
+  --card-border: rgba(255, 255, 255, 0.28);
+  --text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: 'Hind Siliguri', 'Segoe UI', Tahoma, sans-serif;
+  background: radial-gradient(circle at 20% 20%, #ff5277, #7928ca 50%, #2a0845 100%);
+  background-attachment: fixed;
+  color: #ffffff;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ব্যাকগ্রাউন্ড অ্যানিমেটেড গ্লো ও বাবল */
+.bg-glow {
+  position: absolute;
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(255, 117, 140, 0.45) 0%, rgba(255,255,255,0) 70%);
+  border-radius: 50%;
+  filter: blur(40px);
+  animation: pulseGlow 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-1 { top: -60px; left: -60px; }
+.glow-2 { bottom: -60px; right: -60px; animation-delay: -4s; background: radial-gradient(circle, rgba(142, 68, 173, 0.5) 0%, rgba(255,255,255,0) 70%); }
+
+@keyframes pulseGlow {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.3) translate(40px, 30px); }
+}
+
+/* ক্যানভাস (কনফেটি) */
+#confettiCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 99;
+}
+
+/* টপ বার ও সাউন্ড বাটন */
+.top-nav {
+  position: fixed;
+  top: 15px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  z-index: 100;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.step-indicator {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  background: rgba(255, 255, 255, 0.18);
+  padding: 6px 14px;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.25);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.sound-toggle {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background 0.2s;
+}
+.sound-toggle:active {
+  transform: scale(0.9);
+}
+
+/* প্রগ্রেস বার */
+.progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  z-index: 101;
+}
+.progress-bar {
+  height: 100%;
+  width: 12.5%;
+  background: linear-gradient(90deg, #ff758c, #ffd166, #ff70a6);
+  transition: width 0.4s ease;
+  box-shadow: 0 0 10px #ff758c;
+}
+
+/* পেজ কার্ড ডিজাইন */
+.page-container {
+  width: 100%;
+  max-width: 520px;
+  padding: 20px;
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  width: 100%;
+  padding: 38px 26px;
+  border-radius: 28px;
+  background: var(--card-bg);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--card-border);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  text-align: center;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.box.active {
+  display: flex;
+  animation: slideFadeIn 0.65s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* আইকন ও ইমোজি */
+.flower {
+  font-size: 42px;
+  margin-bottom: 14px;
+  animation: floatEmoji 2.4s ease-in-out infinite;
+  display: inline-block;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.2));
+}
+
+@keyframes floatEmoji {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.08); }
+}
+
+h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  letter-spacing: -0.2px;
+  text-shadow: var(--text-shadow);
+  line-height: 1.35;
+}
+
+.gold-gradient-text {
+  background: linear-gradient(135deg, #fff275, #ffd166, #ff9f1c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1.5px;
+}
+
+.big {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin: 12px 0 16px;
+  text-shadow: 0 4px 15px rgba(255, 75, 126, 0.4);
+  font-family: 'Poppins', 'Hind Siliguri', sans-serif;
+}
+
+p {
+  font-size: 18px;
+  line-height: 1.85;
+  color: #f7f7f7;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-weight: 400;
+}
+
+.small {
+  font-size: 15px;
+  margin-top: 10px;
+  display: inline-block;
+  opacity: 0.9;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 4px 14px;
+  border-radius: 14px;
+}
+
+/* বাটনস */
+.btn-group {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+  width: 100%;
+  justify-content: center;
+}
+
+button {
+  padding: 14px 26px;
+  border: none;
+  border-radius: 50px;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+  transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #ffffff, #fff0f5);
+  color: #d63384;
+  flex: 1;
+  max-width: 250px;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 71, 126, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.16);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  padding: 14px 18px;
+}
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25D366, #128C7E);
+  color: white;
+  margin-top: 10px;
+  width: 100%;
+  max-width: 260px;
+  text-decoration: none;
+}
+
+/* ইন্টারেক্টিভ কেক এবং মোমবাতি */
+.cake-wrapper {
+  margin: 10px 0 16px;
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+}
+
+.cake-icon {
+  font-size: 58px;
+  transition: transform 0.3s;
+  display: block;
+}
+.cake-wrapper:hover .cake-icon {
+  transform: scale(1.1);
+}
+
+.candle-hint {
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.22);
+  padding: 4px 10px;
+  border-radius: 12px;
+  display: inline-block;
+  margin-top: 4px;
+  animation: pulseHint 1.8s infinite;
+}
+
+@keyframes pulseHint {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+/* ভাসমান ব্যাকগ্রাউন্ড ইলিমেন্টস */
+.floating-element {
+  position: fixed;
+  bottom: -60px;
+  font-size: 26px;
+  animation: floatUp linear infinite;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.7;
+}
+
+@keyframes floatUp {
+  0% {
+    bottom: -60px;
+    opacity: 0;
+    transform: translateX(0) rotate(0deg);
+  }
+  20% { opacity: 0.75; }
+  80% { opacity: 0.75; }
+  100% {
+    bottom: 110vh;
+    opacity: 0;
+    transform: translateX(60px) rotate(360deg);
+  }
+}
+
+.f1 { left: 8%; animation-duration: 9s; animation-delay: 0s; font-size: 22px; }
+.f2 { left: 24%; animation-duration: 11s; animation-delay: 2s; font-size: 32px; }
+.f3 { left: 45%; animation-duration: 8.5s; animation-delay: 4.5s; font-size: 26px; }
+.f4 { left: 70%; animation-duration: 12s; animation-delay: 1.5s; font-size: 30px; }
+.f5 { left: 88%; animation-duration: 9.5s; animation-delay: 3s; font-size: 24px; }
+.f6 { left: 55%; animation-duration: 10s; animation-delay: 6s; font-size: 28px; }
+
+/* মোবাইল ফ্রেন্ডলি টুইকস */
+@media (max-width: 420px) {
+  .box { padding: 30px 18px; border-radius: 24px; }
+  h1 { font-size: 23px; }
+  .big { font-size: 28px; }
+  p { font-size: 16.5px; line-height: 1.75; }
+  button { font-size: 15px; padding: 12px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- অডিও এবং ক্যানভাস -->
+<canvas id="confettiCanvas"></canvas>
+<div class="bg-glow glow-1"></div>
+<div class="bg-glow glow-2"></div>
+
+<div class="progress-container">
+  <div class="progress-bar" id="progressBar"></div>
+</div>
+
+<!-- টপ হেডার -->
+<div class="top-nav">
+  <div class="step-indicator" id="stepCounter">1 / 8</div>
+  <button class="sound-toggle" id="soundBtn" onclick="toggleAudio()" title="মিউজিক অন/অফ">🎵</button>
+</div>
+
+<!-- ভাসমান ডেকোরেশন -->
+<div class="floating-element f1">🌸</div>
+<div class="floating-element f2">🎈</div>
+<div class="floating-element f3">💖</div>
+<div class="floating-element f4">✨</div>
+<div class="floating-element f5">🌷</div>
+<div class="floating-element f6">🎂</div>
+
+<!-- কার্ড কন্টেইনার -->
+<div class="page-container">
+
+  <!-- PAGE 1 -->
+  <div class="box active" id="page1">
+    <div class="flower">🎁✨🎁</div>
+    <h1>একটু সময় দে রে দোস্ত 🥰</h1>
+    <p>
+      তোর জন্য ছোট্ট একটা<br>
+      Birthday Surprise তৈরি করেছি 🎂✨
+      <br><br>
+      বক্সটা খুলতে নিচের বাটনে ক্লিক কর 👇
+    </p>
+    <div class="btn-group">
+      <button class="btn-primary" onclick="openGift()">
+        🎁 Gift Open কর
+      </button>
+    </div>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="box" id="page2">
+    <div class="cake-wrapper" onclick="blowCandle()" title="কেকে ক্লিক করে মোমবাতি নেভাও!">
+      <span class="cake-icon" id="cakeEmoji">🎂</span>
+      <div class="candle-hint" id="cakeHint">👆 কেকে ক্লিক করে মোমবাতি নেভাও!</div>
+    </div>
+    
+    <h1 class="gold-gradient-text">🎉 HAPPY BIRTHDAY 🎉</h1>
+    
+    <div class="big">
+      DOST 🥰<br>
+      ❤️ SOJIB ❤️
+    </div>
+
+    <p>
+      🌸🌹🌷🌺🌻🌷🌹🌸
+      <br>
+      তোর জন্মদিন অনেক অনেক শুভ হোক! 🎂
+      <br>
+      সবসময় এমন হাসিখুশি থাকিস দোস্ত ❤️
+      <br>
+      🌸🌹🌷🌺🌻🌷🌹🌸
+    </p>
+
+    <div class="btn-group">
+      <button class="btn-secondary" onclick="prevPage()">⬅️</button>
+      <button class="btn-primary" onclick="nextPage()">পরেরটা দেখ 👀 ➡️</button>
+    </div>
+  </div>
+
+  <!-- PAGE 3 -->
+  <div class="box" id="page3">
+    <div class="flower">🌸✨🤲✨🌸</div>
+    <h1>💖 তোর জন্য দোয়া 💖</h1>
+    <p>
+      তোর আগামী দিনগুলো<br>
+      অনেক সুন্দর ও শান্তিময় কাটুক। 🥰
+      <br><br>
+      জীবনের প্রতিটা নেক স্বপ্ন পূরণ হোক,<br>
+      সবসময় ভালো থাকিস ও সুস্থ থাকিস। ❤️
+      <br><br>
+      তোর জন্য মন থেকে সবসময় দোয়া রইলো। 🤲💖
+    </p>
+    <div class="btn-group">
+      <button class="btn-secondary" onclick="prevPage()">⬅️</button>
+      <button class="btn-primary" onclick="nextPage()">আরেকটা আছে ❤️</button>
+    </div>
+  </div>
+
+  <!-- PAGE 4 -->
+  <div class="box" id="page4">
+    <div class="flower">🥺❤️🥺</div>
+    <h1>মন থেকে কিছু কথা...</h1>
+    <p>
+      জানিনা তোর সাথে<br>
+      এভাবে কতদিন থাকতে পারবো...
+      <br><br>
+      কিন্তু একটা কথা একদম সত্যি—<br>
+      তোকে আমি কোনোদিনও<br>
+      ভুলতে পারবো না রে বন্ধু। ❤️
+      <br><br>
+      কিছু মানুষ অল্প সময়েই<br>
+      মনের অনেক গভীরে জায়গা করে নেয়। 🥺💖
+    </p>
+    <div class="btn-group">
+      <button class="btn-secondary" onclick="prevPage()">⬅️</button>
+      <button class="btn-primary" onclick="nextPage()">পরেরটা ❤️</button>
+    </div>
+  </div>
+
+  <!-- PAGE 5 -->
+  <div class="box" id="page5">
+    <div class="flower">🤝❤️🤝</div>
+    <h1>আমাদের বন্ধনটা ❤️</h1>
+    <p>
+      সম্পর্কটা অল্প কিছুদিনের হলেও,<br><br>
+      অনেকটা নিজের ভাইয়ের মতো<br>
+      করে মেনে নিয়েছি তোকে। 🥰
+      <br><br>
+      তুই শুধু বন্ধু না রে,<br>
+      নিজের পরিবারের একজন মানুষের মতোই<br>
+      হয়ে গেছিস। ❤️
+      <br><br>
+      সবসময় এমনই থাকিস দোস্ত। 🤝💖
+    </p>
+    <div class="btn-group">
+      <button class="btn-secondary" onclick="prevPage()">⬅️</button>
+      <button class="btn-primary" onclick="nextPage()">আরেকটা কথা আছে 😅</button>
+    </div>
+  </div>
+
+  <!-- PAGE 6 -->
+  <div class="box" id="page6">
+    <div class="flower">🥺💸❤️</div>
+    <h1>একটু মাফ করে দিস 😅</h1>
+    <p>
+      আর হ্যাঁ দোস্ত...
+      <br><br>
+      Sorry রে 🥺<br>
+      তোর Birthday-তে কোনো দামী গিফট দিতে পারলাম না। 😔
+      <br><br>
+      তুই তো জানিসই,<br>
+      তোর এই বন্ধুর পকেট আপাতত ফাঁকা! 😅
+      <br><br>
+      ইনশাআল্লাহ সামনের বার বেঁচে থাকলে<br>
+      তোকে স্পেশাল কিছু উপহার দিবো। ❤️🎁
+      <br><br>
+      এইবার মনভরা ভালোবাসাটাই গ্রহণ করিস। 🥰❤️
+    </p>
+    <div class="btn-group">
+      <button class="btn-secondary" onclick="prevPage()">⬅️</button>
+      <button class="btn-primary" onclick="nextPage()">শেষের আগেরটা 😅</button>
+    </div>
+  </div>
+
+  <!-- PAGE 7 -->
+  <div class="box" id="page7">
+    <div class="flower">😂💸🤣</div>
+    <h1>একটা আইডিয়া আছে! 💡</h1>
+    <p>
+      আরে হ্যাঁ...<br><br>
+      তুই চাইলে কিন্তু এই গরীব দোস্তকে<br>
+      একটা ছোট্ট বাজেট দিতে পারিস! 😅😂
+      <br><br>
+      তোর জন্মদিনের খুশিতে<br>
+      আমাকে একটা ভালো ট্রিট দিয়ে খুশি করে দে! 🤣🍕
+      <br><br>
+      <span class="small">
+        পুরোটাই মজা করলাম দোস্ত 😂❤️
+      </span>
+    </p>
+    <div class="btn-group">
+      <button class="btn-secondary" onclick="prevPage()">⬅️</button>
+      <button class="btn-primary" onclick="nextPage()">শেষ Surprise 🎁</button>
+    </div>
+  </div>
+
+  <!-- PAGE 8 -->
+  <div class="box" id="page8">
+    <div class="flower">🎉👑✨👑🎉</div>
+    <h1 class="gold-gradient-text">HAPPY BIRTHDAY</h1>
+    
+    <div class="big">
+      💞 SOJIB 💞
+    </div>
+
+    <p>
+      🌸🌹🌷🌺🌻🌷🌹🌸
+      <br><br>
+      মহান আল্লাহ তোকে সবসময় নিরাপদে আর ভালো রাখুক। 🤲❤️
+      <br>
+      জীবনের প্রতিটি দিন অনাবিল সুখ,<br>
+      সাফল্য আর হাসিতে ভরে উঠুক। 🥰
+      <br><br>
+      তোর মতো একটা ভালো মনের বন্ধু পাওয়া<br>
+      সত্যিই ভাগ্যের ব্যাপার। ❤️🤝
+      <br><br>
+      <b>আবারও জানাই— শুভ জন্মদিন সজীব! 🎂🎉💞</b>
+      <br><br>
+      ❤️ Stay Blessed & Happy Always, Dost ❤️
+    </p>
+
+    <div class="btn-group" style="flex-direction: column; align-items: center;">
+      <!-- সরাসরি হোয়াটসঅ্যাপে উইশ জানানোর বাটন -->
+      <a class="btn-whatsapp" href="https://api.whatsapp.com/send?text=Happy%20Birthday%20Sojib!%20%F0%9F%8E%82%E2%9D%A4%EF%B8%8F" target="_blank">
+        💬 সজীবকে মেসেজ পাঠাও
+      </a>
+
+      <div style="display: flex; gap: 10px; width: 100%; justify-content: center; margin-top: 8px;">
+        <button class="btn-secondary" onclick="prevPage()">⬅️ পেছনে</button>
+        <button class="btn-primary" onclick="restart()">🔄 আবার শুরু কর</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let currentPage = 1;
+const totalPages = 8;
+let audioPlaying = false;
+let audioCtx = null;
+let melodyInterval = null;
+
+// পেজ পরিবর্তন
+function showPage(page) {
+  for (let i = 1; i <= totalPages; i++) {
+    const el = document.getElementById("page" + i);
+    if (el) el.classList.remove("active");
+  }
+  
+  const currentEl = document.getElementById("page" + page);
+  if (currentEl) {
+    currentEl.classList.add("active");
+  }
+
+  // প্রগ্রেস বার ও কাউন্টার আপডেট
+  document.getElementById("stepCounter").innerText = `${page} / ${totalPages}`;
+  document.getElementById("progressBar").style.width = `${(page / totalPages) * 100}%`;
+
+  // স্পেশাল পেজে কনফেটি
+  if (page === 2 || page === 8) {
+    launchConfetti();
+  }
+}
+
+function nextPage() {
+  playChime(523.25); // মিষ্টি সাউন্ড নোট C5
+  if (currentPage < totalPages) {
+    currentPage++;
+    showPage(currentPage);
+  }
+}
+
+function prevPage() {
+  playChime(440); // A4 নোট
+  if (currentPage > 1) {
+    currentPage--;
+    showPage(currentPage);
+  }
+}
+
+function openGift() {
+  startMelody();
+  launchConfetti();
+  nextPage();
+}
+
+function restart() {
+  currentPage = 1;
+  showPage(1);
+  launchConfetti();
+}
+
+// মোমবাতি নেভানোর ইন্টারেকশন
+let candleBlown = false;
+function blowCandle() {
+  if (!candleBlown) {
+    candleBlown = true;
+    document.getElementById("cakeEmoji").innerText = "🍰✨";
+    document.getElementById("cakeHint").innerHTML = "🎉 মোমবাতি নিভে গেছে! উইশ কবুল হোক! 💖";
+    launchConfetti();
+    playChime(659.25); // E5 note
+    setTimeout(() => playChime(783.99), 150); // G5 note
+  }
+}
+
+/* ============================================================
+   সুইট ওয়েব অডিও টিউন (কোনো এক্সটার্নাল ফাইলের দরকার নেই)
+============================================================ */
+function initAudio() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+}
+
+function playChime(freq) {
+  try {
+    initAudio();
+    if (audioCtx.state === 'suspended') {
+      audioCtx.resume();
+    }
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.6);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + 0.6);
+  } catch (e) {}
+}
+
+// মৃদু বার্থডে টিউন নোটস
+const bdayNotes = [
+  {f: 261.63, d: 300}, {f: 261.63, d: 300}, {f: 293.66, d: 600}, {f: 261.63, d: 600}, {f: 349.23, d: 600}, {f: 329.63, d: 1100},
+  {f: 261.63, d: 300}, {f: 261.63, d: 300}, {f: 293.66, d: 600}, {f: 261.63, d: 600}, {f: 392.00, d: 600}, {f: 349.23, d: 1100}
+];
+
+let noteIdx = 0;
+function playNextNote() {
+  if (!audioPlaying) return;
+  const n = bdayNotes[noteIdx];
+  playChime(n.f);
+  noteIdx = (noteIdx + 1) % bdayNotes.length;
+  melodyInterval = setTimeout(playNextNote, n.d + 120);
+}
+
+function startMelody() {
+  initAudio();
+  audioPlaying = true;
+  document.getElementById("soundBtn").innerText = "🔊";
+  clearTimeout(melodyInterval);
+  playNextNote();
+}
+
+function toggleAudio() {
+  initAudio();
+  audioPlaying = !audioPlaying;
+  const btn = document.getElementById("soundBtn");
+  if (audioPlaying) {
+    btn.innerText = "🔊";
+    playNextNote();
+  } else {
+    btn.innerText = "🔇";
+    clearTimeout(melodyInterval);
+  }
+}
+
+/* ============================================================
+   হালকা ও দ্রুতগতির কনফেটি অ্যানিমেশন (Canvas Confetti)
+============================================================ */
+const canvas = document.getElementById('confettiCanvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+
+function launchConfetti() {
+  const colors = ['#ff477e', '#ffd166', '#06d6a0', '#118ab2', '#ffffff', '#ff9f1c'];
+  for (let i = 0; i < 90; i++) {
+    particles.push({
+      x: canvas.width * (0.3 + Math.random() * 0.4),
+      y: canvas.height * 0.5,
+      size: Math.random() * 8 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      vx: (Math.random() - 0.5) * 14,
+      vy: (Math.random() - 0.7) * 16,
+      rot: Math.random() * 360,
+      vRot: (Math.random() - 0.5) * 12,
+      opacity: 1
+    });
+  }
+}
+
+function updateConfetti() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.35; // মাধ্যাকর্ষণ
+    p.rot += p.vRot;
+    p.opacity -= 0.008;
+
+    ctx.save();
+    ctx.globalAlpha = Math.max(p.opacity, 0);
+    ctx.translate(p.x, p.y);
+    ctx.rotate((p.rot * Math.PI) / 180);
+    ctx.fillStyle = p.color;
+    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.7);
+    ctx.restore();
+
+    if (p.opacity <= 0 || p.y > canvas.height + 30) {
+      particles.splice(i, 1);
+    }
+  }
+  requestAnimationFrame(updateConfetti);
+}
+updateConfetti();
+</script>
+
+</body>
+</html>
